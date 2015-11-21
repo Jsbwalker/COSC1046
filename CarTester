@@ -1,0 +1,44 @@
+package question2;
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class CarTester {
+	public static void main(String[] args){
+		Scanner input = new Scanner(System.in);
+		Random rand = new Random();
+		int randomVal = rand.nextInt(40) + 1;
+		int breaks = 0;
+		String make;
+		int year;
+	
+		System.out.print("Please enter the make and model of the car: ");
+		make = input.next();
+		year = input.nextInt();
+		
+		Car userCar = new Car(year, make);
+		System.out.printf("New car created! %s, %d%n", userCar.getMake(), userCar.getYear());
+		
+		userCar.accelerate();
+		displaySpeed(userCar);
+		
+		for (int x = 0; x < randomVal; x++)
+			userCar.accelerate();
+		displaySpeed(userCar);
+		
+		while (userCar.getSpeed() != 0){
+			breaks++;
+			userCar.brake();
+		}
+		displaySpeed(userCar, String.format("and the breaks were applied %d times.", breaks));
+		input.close();
+	}
+	
+	public static void displaySpeed(Car currentCar){
+		System.out.printf("The current speed is %d.%n", currentCar.getSpeed());
+	}
+	
+	public static void displaySpeed(Car currentCar, String s){
+		System.out.printf("The current speed is %d, %s%n", currentCar.getSpeed(), s);
+	}
+}
